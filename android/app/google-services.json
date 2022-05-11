@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1075384122007",
+    "project_id": "gumshoe-be8bf",
+    "storage_bucket": "gumshoe-be8bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075384122007:android:8ede1b34479b8ef65dc7d2",
+        "android_client_info": {
+          "package_name": "com.example.gumshoe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075384122007-rm4dl83l1epbp3va5e3dduumsdaebijk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUgY6br8VmeSm33jTWjzuROUcQ_yvsoqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075384122007-rm4dl83l1epbp3va5e3dduumsdaebijk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
