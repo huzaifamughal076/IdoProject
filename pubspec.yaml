@@ -71,6 +71,15 @@ flutter:
    - assets/images/logo.png
    - assets/images/googleicon.png
    - assets/images/facebookicon.png
+   - assets/images/image1.png
+   - assets/images/image2.png
+   - assets/images/image3.png
+
+  fonts:
+    - family: Mulish
+      fonts:
+        - asset: assets/fonts/Mulish-Light.ttf
+        - asset: assets/fonts/Mulish-SemiBold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

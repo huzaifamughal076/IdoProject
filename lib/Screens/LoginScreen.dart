@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Image.asset("assets/images/logo.png"),
                     SizedBox(
-                      height: 50,
+                      height: 20,
                     ),
                     Container(
                       margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -159,7 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Text('Continue with',style: TextStyle(color: Colors.grey,),),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -120,10 +121,35 @@ class _MyActivitiesScreenState extends State<MyActivitiesScreen> {
                         IconButton(
                           icon: Icon(Icons.delete),
                           onPressed: () {
-                            myActivities.removeAt(index);
-                            databaseReference
-                                .child(myActivities[index].id)
-                                .remove();
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) => new CupertinoAlertDialog(
+                                title: new Text("Are you Sure",style: TextStyle(fontSize: 19,color: Colors.black)),
+                                content: new Text("You want to Delete."),
+                                actions: [
+                                  CupertinoDialogAction(isDefaultAction: true,
+                                      onPressed: ()
+                                      {Navigator.pop(context);}, child: new Text("Close")),
+
+
+                                  CupertinoDialogAction(isDefaultAction: true,
+                                      onPressed: ()
+                                      {
+                                        Fluttertoast.showToast(
+                                            msg:
+                                            "Deleted Successfully.");
+                                        Navigator.pop(context);
+                                        myActivities.removeAt(index);
+
+                                        databaseReference
+                                            .child(myActivities[index].id).remove();
+
+
+                                      }, child: new Text("Delete"))
+                                ],
+                              ),
+                            );
                           },
                         ),
                         IconButton(
