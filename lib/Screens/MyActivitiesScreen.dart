@@ -8,11 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gumshoe/Models/ActivityModel.dart';
 import 'package:gumshoe/Screens/CreateActivityScreen.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MyActivitiesScreen extends StatefulWidget {
-  final String uid;
+  final String uid,userName;
 
-  const MyActivitiesScreen(this.uid, {Key? key}) : super(key: key);
+  const MyActivitiesScreen(this.uid,this.userName, {Key? key}) : super(key: key);
 
   @override
   State<MyActivitiesScreen> createState() => _MyActivitiesScreenState();
@@ -155,7 +156,7 @@ class _MyActivitiesScreenState extends State<MyActivitiesScreen> {
                         IconButton(
                           icon: Icon(Icons.share),
                           onPressed: () {
-                            /* ... */
+                            Share.share("Activity Created By: "+widget.userName+"\n\nActivity Name: "+currentItem.name+"\nActivity pass: "+currentItem.password);
                           },
                         ),
                         IconButton(
@@ -269,15 +270,43 @@ class _MyActivitiesScreenState extends State<MyActivitiesScreen> {
                                                   SizedBox(width: 10),
                                                   ElevatedButton(
                                                       onPressed: () {
-                                                        if (formKey.currentState != null && formKey.currentState!.validate()) {
-                                                          DatabaseReference databaseReference = FirebaseDatabase.instance.reference().child("Activities");
 
-                                                          databaseReference.child(currentItem.id).child("name").set(name);
-                                                          databaseReference.child(currentItem.id).child("password").set(password);
-                                                          Fluttertoast.showToast(msg: "Updated Successfully");
+                                                        if (formKey.currentState != null && formKey.currentState!.validate()) {
+                                                          showDialog(
+                                                            context: context,
+                                                            barrierDismissible: false,
+                                                            builder: (BuildContext context) => new CupertinoAlertDialog(
+                                                              title: new Text("Are you Sure",style: TextStyle(fontSize: 19,color: Colors.black)),
+                                                              content: new Text("You want to Update."),
+                                                              actions: [
+                                                                CupertinoDialogAction(isDefaultAction: true,
+                                                                    onPressed: ()
+                                                                    {Navigator.pop(context);}, child: new Text("No")),
+
+
+                                                                CupertinoDialogAction(isDefaultAction: true,
+                                                                    onPressed: ()
+                                                                    {
+                                                                       DatabaseReference databaseReference = FirebaseDatabase.instance.reference().child("Activities");
+
+                                                                        databaseReference.child(currentItem.id).child("name").set(name);
+                                                                        databaseReference.child(currentItem.id).child("password").set(password);
+                                                                        Fluttertoast.showToast(msg: "Updated Successfully");
+                                                                        Navigator.pop(context);
+                                                                        Navigator.pop(context);
+
+
+
+                                                                    }, child: new Text("Yes"))
+                                                              ],
+                                                            ),
+                                                          );
 
                                                         } else
                                                           return;
+
+
+
                                                       },
                                                       child: Text("Update"))
                                                 ],

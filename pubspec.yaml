@@ -43,6 +43,8 @@ dependencies:
   carousel_slider: ^4.1.1
   geolocator: ^8.2.1
   loading_indicator:
+  share_plus: ^4.0.4
+  permission_handler: ^9.2.0
 
 dev_dependencies:
   flutter_test:

@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:gumshoe/Screens/HomeScreen.dart';
 import 'package:gumshoe/Screens/SignUpScreen.dart';
 import '../External Widgets/Loading.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -127,6 +128,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(16.0))),
                               onPressed: () {
+
+                                requestMultiplePermissions();
+
                                 if (formkey.currentState != null &&
                                     formkey.currentState!.validate()) {
                                   SignInFunc(Email, Password);
@@ -298,5 +302,19 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       viewVisible = false;
     });
+  }
+
+}
+
+void requestMultiplePermissions() async {
+  var status = await Permission.location.status;
+  if (status.isGranted) {
+    print("Granted: ");
+  } else if (status.isDenied) {
+    if (await Permission.location
+        .request()
+        .isGranted) {
+      print("Grants");
+    }
   }
 }

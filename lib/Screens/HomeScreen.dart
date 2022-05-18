@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:gumshoe/Models/ActivityModel.dart';
@@ -323,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => MyActivitiesScreen(widget.uid)));
+                      builder: (context) => MyActivitiesScreen(widget.uid,widget.name)));
             },
           ),
           ListTile(
@@ -358,13 +359,37 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text('Log Out'),
             leading: Icon(Icons.exit_to_app),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushAndRemoveUntil<dynamic>(
-                  context,
-                  MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => LoginScreen(),
-              ),
-                    (route) => false,
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) => new CupertinoAlertDialog(
+                  title: new Text("Are you Sure",style: TextStyle(fontSize: 19,color: Colors.black)),
+                  content: new Text("You want to Log out."),
+                  actions: [
+                    CupertinoDialogAction(isDefaultAction: true,
+                        onPressed: ()
+                        {Navigator.pop(context);}, child: new Text("Close")),
+
+
+                    CupertinoDialogAction(isDefaultAction: true,
+                        onPressed: ()
+                        {
+                          Fluttertoast.showToast(
+                              msg:
+                              "Log out Successfully.");
+                          Navigator.pop(context);
+                          Navigator.pushAndRemoveUntil<dynamic>(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                              builder: (BuildContext context) => LoginScreen(),
+                            ),
+                                (route) => false,
+                          );
+
+
+                        }, child: new Text("LOG OUT"))
+                  ],
+                ),
               );
             },
           ),
